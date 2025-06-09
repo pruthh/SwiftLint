@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - SwiftLint</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .cart-container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 20px;
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .item-title {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .item-color {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .item-price {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 20px;
+        }
+
+        .quantity-btn {
+            background: #f5f5f5;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .remove-btn {
+            color: #ff4444;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .remove-btn:hover {
+            color: #cc0000;
+        }
+
+        .cart-summary {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .checkout-form {
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .card-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-input-group input {
+            flex: 1;
+        }
+
+        .card-input-group input[name="cvv"] {
+            width: 100px;
+        }
+
+        .checkout-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: #c0392b;
+        }
+
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .card-number-input {
+            letter-spacing: 1px;
+        }
+
+        .cvv-input {
+            -webkit-text-security: disc;
+            text-security: disc;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SwiftLint</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#product">Product</a></li>
+            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></a></li>
+        </ul>
+    </nav>
+
+    <div class="cart-container">
+        <h1>Your Cart</h1>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal">₹0</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>₹50</span>
+            </div>
+            <div class="summary-row">
+                <span>Total</span>
+                <span id="total">₹0</span>
+            </div>
+
+            <form class="checkout-form" id="checkout-form">
+                <div class="form-group">
+                    <label for="card-name">Name on Card</label>
+                    <input type="text" id="card-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" class="card-number-input" maxlength="19" placeholder="1234 5678 9012 3456" required>
+                    <div class="error-message" id="card-number-error">Please enter a 16-digit card number</div>
+                </div>
+                <div class="card-input-group">
+                    <div class="form-group">
+                        <label for="expiry">Expiry Date</label>
+                        <input type="text" id="expiry" name="expiry" placeholder="MM/YY" maxlength="5" required>
+                        <div class="error-message" id="expiry-error">Invalid expiry date</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="password" id="cvv" name="cvv" class="cvv-input" maxlength="3" placeholder="123" required>
+                        <div class="error-message" id="cvv-error">CVV must be 3 digits</div>
+                    </div>
+                </div>
+                <button type="submit" class="checkout-btn" id="checkout-btn">Proceed to Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>SwiftLint</h4>
+                <p>Innovating the way you care for your clothes</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: info@swiftlint.com</p>
+                <p>Phone: (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SwiftLint. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        updateCartCount();
+        displayCart();
+
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+
+        function displayCart() {
+            const cartItems = document.getElementById('cart-items');
+            const subtotalElement = document.getElementById('subtotal');
+            const totalElement = document.getElementById('total');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty</p>';
+                subtotalElement.textContent = '₹0';
+                totalElement.textContent = '₹0';
+                return;
+            }
+
+            let subtotal = 0;
+            cartItems.innerHTML = cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                return `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="item-image">
+                        <div class="item-details">
+                            <h3 class="item-title">${item.name}</h3>
+                            <p class="item-color">Color: ${item.color}</p>
+                            <p class="item-price">₹${item.price}</p>
+                        </div>
+                        <div class="item-quantity">
+                            <button class="quantity-btn" onclick="updateQuantity('${item.id}', ${item.quantity - 1})">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.id}', ${item.quantity + 1})">+</button>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem('${item.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            subtotalElement.textContent = `₹${subtotal}`;
+            totalElement.textContent = `₹${subtotal + 50}`; // Adding shipping cost
+        }
+
+        function updateQuantity(id, newQuantity) {
+            if (newQuantity < 1) {
+                removeItem(id);
+                return;
+            }
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity = newQuantity;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCart();
+                updateCartCount();
+            }
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+            updateCartCount();
+        }
+
+        // Card number formatting and validation
+        const cardNumberInput = document.getElementById('card-number');
+        cardNumberInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 16) {
+                value = value.slice(0, 16);
+            }
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue;
+            
+            const errorElement = document.getElementById('card-number-error');
+            if (value.length !== 16) {
+                errorElement.style.display = 'block';
+                errorElement.textContent = 'Please enter a 16-digit card number';
+                document.getElementById('checkout-btn').disabled = true;
+            } else {
+                errorElement.style.display = 'none';
+                document.getElementById('checkout-btn').disabled = false;
+            }
+        });
+
+        // CVV validation
+        const cvvInput = document.getElementById('cvv');
+        cvvInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 3) {
+                value = value.slice(0, 3);
+            }
+            e.target.value = value;
+            
+            const errorElement = document.getElementById('cvv-error');
+            if (value.length !== 3) {
+                errorElement.style.display = 'block';
+                document.getElementById('checkout-btn').disabled = true;
+            } else {
+                errorElement.style.display = 'none';
+                document.getElementById('checkout-btn').disabled = false;
+            }
+        });
+
+        // Expiry date validation
+        const expiryInput = document.getElementById('expiry');
+        expiryInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+            
+            const errorElement = document.getElementById('expiry-error');
+            if (!isValidExpiryDate(value)) {
+                errorElement.style.display = 'block';
+                document.getElementById('checkout-btn').disabled = true;
+            } else {
+                errorElement.style.display = 'none';
+                document.getElementById('checkout-btn').disabled = false;
+            }
+        });
+
+        // Helper functions for validation
+        function isValidCardNumber(number) {
+            // Luhn algorithm for card number validation
+            let sum = 0;
+            let isEven = false;
+            
+            // Loop through values starting from the rightmost digit
+            for (let i = number.length - 1; i >= 0; i--) {
+                let digit = parseInt(number[i]);
+                
+                if (isEven) {
+                    digit *= 2;
+                    if (digit > 9) {
+                        digit -= 9;
+                    }
+                }
+                
+                sum += digit;
+                isEven = !isEven;
+            }
+            
+            return sum % 10 === 0;
+        }
+
+        function isValidExpiryDate(expiry) {
+            if (!expiry || expiry.length !== 5) return false;
+            
+            const [month, year] = expiry.split('/');
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear() % 100;
+            const currentMonth = currentDate.getMonth() + 1;
+            
+            const expMonth = parseInt(month);
+            const expYear = parseInt(year);
+            
+            if (isNaN(expMonth) || isNaN(expYear)) return false;
+            if (expMonth < 1 || expMonth > 12) return false;
+            
+            if (expYear < currentYear) return false;
+            if (expYear === currentYear && expMonth < currentMonth) return false;
+            
+            return true;
+        }
+
+        // Form submission
+        document.getElementById('checkout-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate all fields before submission
+            const cardNumber = cardNumberInput.value.replace(/\s/g, '');
+            const cvv = cvvInput.value;
+            const expiry = expiryInput.value;
+            
+            if (cardNumber.length !== 16) {
+                document.getElementById('card-number-error').style.display = 'block';
+                document.getElementById('card-number-error').textContent = 'Please enter a 16-digit card number';
+                return;
+            }
+            
+            if (cvv.length !== 3) {
+                document.getElementById('cvv-error').style.display = 'block';
+                return;
+            }
+            
+            if (!isValidExpiryDate(expiry)) {
+                document.getElementById('expiry-error').style.display = 'block';
+                return;
+            }
+            
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            alert('Order placed successfully!');
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+            updateCartCount();
+            this.reset();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftLint - The Future of Hangers</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .product-image img, .gallery-item img {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-image img:hover, .gallery-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SwiftLint</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#product">Product</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Revolutionary Hanger Design</h1>
+            <p class="hero-subtitle">Experience the future of clothing care with our innovative detachable lint roller technology</p>
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <i class="fas fa-magic"></i>
+                    <h3>Smart Design</h3>
+                    <p>Seamlessly integrated lint roller that detaches with a simple click</p>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-broom"></i>
+                    <h3>Easy Cleaning</h3>
+                    <p>Quick and efficient lint removal for all your clothes</p>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Premium Quality</h3>
+                    <p>Built with durable materials for long-lasting performance</p>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="shop.html" class="cta-button primary">Shop Now</a>
+                <a href="learn-more.html" class="cta-button secondary">Learn More</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Happy Customers</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4.9</span>
+                    <span class="stat-label">Customer Rating</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Support</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <h2>Key Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Detachable Design</h3>
+                <p>Easily remove and attach the lint roller for convenient cleaning</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>Premium Quality</h3>
+                <p>Built with durable materials for long-lasting performance</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧹</div>
+                <h3>Efficient Cleaning</h3>
+                <p>Advanced lint removal technology for spotless clothes</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="product" class="product-showcase">
+        <h2>Experience the Innovation</h2>
+        <div class="product-container">
+            <div class="product-info">
+                <h3>Smart Design</h3>
+                <p>Our revolutionary hanger combines style with functionality, featuring a seamlessly integrated lint roller that detaches with a simple click.</p>
+                <table class="product-features">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-check"></i> Ergonomic Design</td>
+                            <td>Comfortable grip and balanced weight distribution</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-check"></i> Easy Detachment</td>
+                            <td>One-click mechanism for quick roller removal</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-check"></i> Replaceable Roller</td>
+                            <td>Simple sheet replacement system</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-check"></i> Space-Saving</td>
+                            <td>Compact design for efficient storage</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="product-image">
+                <img src="C:\Users\Pruthh\OneDrive\Desktop\EM\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg" alt="SwiftLint Hanger">
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <h2>Product Gallery</h2>
+        <div class="gallery-container">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="image-container">
+                        <img src="C:\Users\Pruthh\OneDrive\Desktop\EM\front.jpg" alt="Hanger Front View">
+                    </div>
+                    <p>Front View</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-container">
+                        <img src="C:\Users\Pruthh\OneDrive\Desktop\EM\top.jpg" alt="Hanger Top View">
+                    </div>
+                    <p>Top View</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-container">
+                        <img src="C:\Users\Pruthh\OneDrive\Desktop\EM\back.jpg" alt="Hanger Back View">
+                    </div>
+                    <p>Back View</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Get in Touch</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Message" required></textarea>
+            <button type="submit" class="submit-button">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>SwiftLint</h4>
+                <p>Innovating the way you care for your clothes</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: info@swiftlint.com</p>
+                <p>Phone: (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SwiftLint. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        updateCartCount();
+
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert('Item added to cart!');
+        }
+    </script>
+</body>
+</html> 

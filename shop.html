@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - SwiftLint</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .shop-container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .product-price {
+            font-size: 1.3em;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #c0392b;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .product-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .product-features li {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .product-features li i {
+            color: var(--accent-color);
+            margin-right: 5px;
+        }
+
+        .color-label {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SwiftLint</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#product">Product</a></li>
+            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></a></li>
+        </ul>
+    </nav>
+
+    <div class="shop-container">
+        <h1>Choose Your SwiftLint Hanger</h1>
+        <div class="products-grid">
+            <!-- Natural Wood -->
+            <div class="product-card">
+                <img src="C:\Users\Pruthh\OneDrive\Desktop\EM\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg" alt="SwiftLint Hanger - Natural Wood" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">SwiftLint Smart Hanger</h3>
+                    <span class="color-label">Natural Wood</span>
+                    <p class="product-description">Premium hanger with detachable lint roller technology</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Detachable lint roller</li>
+                        <li><i class="fas fa-check"></i> Premium quality materials</li>
+                        <li><i class="fas fa-check"></i> Space-saving design</li>
+                    </ul>
+                    <div class="product-price">₹349</div>
+                    <button class="add-to-cart-btn" onclick="addToCart({
+                        id: 'swiftlint-hanger-natural',
+                        name: 'SwiftLint Smart Hanger - Natural Wood',
+                        price: 349,
+                        image: 'C:\\Users\\Pruthh\\OneDrive\\Desktop\\EM\\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg',
+                        color: 'Natural Wood'
+                    })">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Classic Red -->
+            <div class="product-card">
+                <img src="C:\Users\Pruthh\OneDrive\Desktop\EM\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg" alt="SwiftLint Hanger - Classic Red" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">SwiftLint Smart Hanger</h3>
+                    <span class="color-label">Classic Red</span>
+                    <p class="product-description">Premium hanger with detachable lint roller technology</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Detachable lint roller</li>
+                        <li><i class="fas fa-check"></i> Premium quality materials</li>
+                        <li><i class="fas fa-check"></i> Space-saving design</li>
+                    </ul>
+                    <div class="product-price">₹349</div>
+                    <button class="add-to-cart-btn" onclick="addToCart({
+                        id: 'swiftlint-hanger-red',
+                        name: 'SwiftLint Smart Hanger - Classic Red',
+                        price: 349,
+                        image: 'C:\\Users\\Pruthh\\OneDrive\\Desktop\\EM\\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg',
+                        color: 'Classic Red'
+                    })">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ocean Teal -->
+            <div class="product-card">
+                <img src="C:\Users\Pruthh\OneDrive\Desktop\EM\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg" alt="SwiftLint Hanger - Ocean Teal" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">SwiftLint Smart Hanger</h3>
+                    <span class="color-label">Ocean Teal</span>
+                    <p class="product-description">Premium hanger with detachable lint roller technology</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Detachable lint roller</li>
+                        <li><i class="fas fa-check"></i> Premium quality materials</li>
+                        <li><i class="fas fa-check"></i> Space-saving design</li>
+                    </ul>
+                    <div class="product-price">₹349</div>
+                    <button class="add-to-cart-btn" onclick="addToCart({
+                        id: 'swiftlint-hanger-teal',
+                        name: 'SwiftLint Smart Hanger - Ocean Teal',
+                        price: 349,
+                        image: 'C:\\Users\\Pruthh\\OneDrive\\Desktop\\EM\\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg',
+                        color: 'Ocean Teal'
+                    })">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sky Blue -->
+            <div class="product-card">
+                <img src="C:\Users\Pruthh\OneDrive\Desktop\EM\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg" alt="SwiftLint Hanger - Sky Blue" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">SwiftLint Smart Hanger</h3>
+                    <span class="color-label">Sky Blue</span>
+                    <p class="product-description">Premium hanger with detachable lint roller technology</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Detachable lint roller</li>
+                        <li><i class="fas fa-check"></i> Premium quality materials</li>
+                        <li><i class="fas fa-check"></i> Space-saving design</li>
+                    </ul>
+                    <div class="product-price">₹349</div>
+                    <button class="add-to-cart-btn" onclick="addToCart({
+                        id: 'swiftlint-hanger-blue',
+                        name: 'SwiftLint Smart Hanger - Sky Blue',
+                        price: 349,
+                        image: 'C:\\Users\\Pruthh\\OneDrive\\Desktop\\EM\\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg',
+                        color: 'Sky Blue'
+                    })">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Forest Green -->
+            <div class="product-card">
+                <img src="C:\Users\Pruthh\OneDrive\Desktop\EM\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg" alt="SwiftLint Hanger - Forest Green" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">SwiftLint Smart Hanger</h3>
+                    <span class="color-label">Forest Green</span>
+                    <p class="product-description">Premium hanger with detachable lint roller technology</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Detachable lint roller</li>
+                        <li><i class="fas fa-check"></i> Premium quality materials</li>
+                        <li><i class="fas fa-check"></i> Space-saving design</li>
+                    </ul>
+                    <div class="product-price">₹349</div>
+                    <button class="add-to-cart-btn" onclick="addToCart({
+                        id: 'swiftlint-hanger-green',
+                        name: 'SwiftLint Smart Hanger - Forest Green',
+                        price: 349,
+                        image: 'C:\\Users\\Pruthh\\OneDrive\\Desktop\\EM\\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg',
+                        color: 'Forest Green'
+                    })">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Midnight Black -->
+            <div class="product-card">
+                <img src="C:\Users\Pruthh\OneDrive\Desktop\EM\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg" alt="SwiftLint Hanger - Midnight Black" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">SwiftLint Smart Hanger</h3>
+                    <span class="color-label">Midnight Black</span>
+                    <p class="product-description">Premium hanger with detachable lint roller technology</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Detachable lint roller</li>
+                        <li><i class="fas fa-check"></i> Premium quality materials</li>
+                        <li><i class="fas fa-check"></i> Space-saving design</li>
+                    </ul>
+                    <div class="product-price">₹349</div>
+                    <button class="add-to-cart-btn" onclick="addToCart({
+                        id: 'swiftlint-hanger-black',
+                        name: 'SwiftLint Smart Hanger - Midnight Black',
+                        price: 349,
+                        image: 'C:\\Users\\Pruthh\\OneDrive\\Desktop\\EM\\WhatsApp Image 2025-06-08 at 17.09.08_263bf4d0.jpg',
+                        color: 'Midnight Black'
+                    })">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>SwiftLint</h4>
+                <p>Innovating the way you care for your clothes</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: info@swiftlint.com</p>
+                <p>Phone: (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SwiftLint. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        updateCartCount();
+
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    color: product.color,
+                    quantity: 1
+                });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert('Item added to cart!');
+        }
+    </script>
+</body>
+</html> 
